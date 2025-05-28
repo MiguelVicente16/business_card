@@ -45,6 +45,27 @@
             font-weight: 600;
             color: white;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+        }
+
+        .profile-initials {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 600;
+            color: white;
         }
 
         .name {
@@ -389,18 +410,18 @@
     </div>
 
     <script>
-        // Contact information - UPDATE THESE VALUES WITH YOUR REAL INFO
+        // Contact information - Miguel Vicente's Info
         const contactInfo = {
             name: "Miguel Vicente",
             title: "COO", 
             phone: "+351 962130104",
             email: "general@matchlytics.ai",
-            whatsapp: "+351 962130104", // WhatsApp number in international format without +
+            whatsapp: "351962130104", // WhatsApp number in international format without +
             initials: "MV", // For profile picture fallback
-            photo: "https://media.licdn.com/dms/image/v2/D4D03AQHSPdNGex9_nw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1716369954433?e=1753920000&v=beta&t=iVixgnXNLQQ6nvLkHLaXx8HhcLJmlTEXClFmumg9c6E", // Add your photo URL here (leave empty to use initials)
+            photo: "https://media.licdn.com/dms/image/v2/D4D03AQHSPdNGex9_nw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1716369954433?e=1753920000&v=beta&t=iVixgnXNLQQ6nvLkHLaXx8HhcLJmlTEXClFmumg9c6E", // LinkedIn profile photo
             company: {
                 name: "Matchlytics",
-                logo: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Crect width='200' height='60' fill='%23111827'/%3E%3Ctext x='100' y='35' font-family='Arial' font-size='20' font-weight='bold' text-anchor='middle' fill='white'%3EYour Logo%3C/text%3E%3C/svg%3E" // Replace with your logo URL
+                logo: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Crect width='200' height='60' fill='%23111827'/%3E%3Ctext x='100' y='35' font-family='Arial' font-size='20' font-weight='bold' text-anchor='middle' fill='white'%3EMatchlytics%3C/text%3E%3C/svg%3E" // Company logo placeholder
             }
         };
 
