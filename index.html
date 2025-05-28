@@ -59,15 +59,20 @@
         /* Company banner in black section - Full width */
         .company-banner {
             margin: -32px -24px 24px -24px;
-            padding: 20px 0;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 0;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
         }
 
+
         .company-logo {
-            max-height: 60px;
             width: 100%;
-            height: auto;
-            object-fit: contain;
+            height: 80px;
+            object-fit: cover;
+            object-position: center;
         }
 
         /* Profile section */
@@ -167,7 +172,7 @@
         .contact-details {
             flex: 1;
             min-width: 0;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
 
         .contact-label {
@@ -299,9 +304,9 @@
 
             .company-banner {
                 margin: -24px -20px 20px -20px;
-                background-color: white;
+                background: white;
             }
-
+            
             .name {
                 font-size: 22px;
             }
