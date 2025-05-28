@@ -56,28 +56,18 @@
             border-radius: 0 0 50% 50% / 0 0 100% 100%;
         }
 
-        /* Company banner in black section */
+        /* Company banner in black section - Full width */
         .company-banner {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 16px 20px;
-            border-radius: 12px;
-            margin-bottom: 24px;
-            backdrop-filter: blur(10px);
+            margin: -32px -24px 24px -24px;
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .company-logo {
-            max-height: 50px;
-            max-width: 180px;
-            width: auto;
+            max-height: 60px;
+            width: 100%;
             height: auto;
             object-fit: contain;
-        }
-
-        .company-name {
-            font-size: 16px;
-            font-weight: 600;
-            color: white;
-            margin-top: 8px;
         }
 
         /* Profile section */
@@ -190,7 +180,9 @@
             font-size: 16px;
             font-weight: 500;
             color: white;
-            word-break: break-word;
+            word-break: break-all;
+            overflow-wrap: break-word;
+            white-space: nowrap;
         }
 
         /* QR Code Section (White) */
@@ -304,8 +296,18 @@
                 padding: 24px 20px;
             }
 
+            .company-banner {
+                margin: -24px -20px 20px -20px;
+            }
+
             .name {
                 font-size: 22px;
+            }
+
+            .contact-value {
+                font-size: 15px;
+                white-space: normal;
+                word-break: break-all;
             }
 
             .action-buttons {
@@ -338,11 +340,10 @@
             <div class="contact-section">
                 <!-- Company Banner -->
                 <div class="company-banner">
-                    <img src="./logo.png" 
+                    <img src="./banner.jpg" 
                          alt="Company Logo" 
                          class="company-logo"
                          id="companyLogo">
-                    <div class="company-name" id="companyName">Matchlytics</div>
                 </div>
 
                 <!-- Profile Section -->
@@ -397,23 +398,6 @@
                         </svg>
                         Download Contact
                     </button>
-                    <button class="btn btn-secondary" onclick="shareContact()">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
-                        </svg>
-                        Share
-                    </button>
-                </div>
-
-                <div class="stats-row">
-                    <div class="stat-item">
-                        <div class="stat-value">QR</div>
-                        <div class="stat-label">Scan & Save</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">vCard</div>
-                        <div class="stat-label">Compatible</div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -431,7 +415,7 @@
             photo: "https://media.licdn.com/dms/image/v2/D4D03AQHSPdNGex9_nw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1716369954433?e=1753920000&v=beta&t=iVixgnXNLQQ6nvLkHLaXx8HhcLJmlTEXClFmumg9c6E", // LinkedIn profile photo
             company: {
                 name: "Matchlytics",
-                logo: "./banner.jpg" // Replace with your actual logo filename
+                logo: "./logo.png" // Replace with your actual logo filename
             }
         };
 
@@ -535,14 +519,11 @@ END:VCARD`;
         // Initialize company information
         function initializeCompanyInfo() {
             const logoElement = document.getElementById('companyLogo');
-            const nameElement = document.getElementById('companyName');
             
             if (contactInfo.company.logo) {
                 logoElement.src = contactInfo.company.logo;
                 logoElement.alt = contactInfo.company.name + ' Logo';
             }
-            
-            nameElement.textContent = contactInfo.company.name;
         }
 
         // Initialize QR code, company info, profile, and contact info when page loads
