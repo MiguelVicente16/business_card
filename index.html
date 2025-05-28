@@ -311,16 +311,15 @@
                      alt="Company Logo" 
                      class="company-logo"
                      id="companyLogo">
-                <div class="company-name" id="companyName">Matchlytics</div>
+                <div class="company-name" id="companyName">Your Company</div>
             </div>
             
-            <div class="profile-image">
-                <img src="https://media.licdn.com/dms/image/v2/D4D03AQHSPdNGex9_nw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1716369954433?e=1753920000&v=beta&t=iVixgnXNLQQ6nvLkHLaXx8HhcLJmlTEXClFmumg9c6E" 
-                     alt="Company Logo" 
-                     id="profileImage">
+            <div class="profile-image" id="profileContainer">
+                <img id="profilePhoto" class="profile-photo" alt="Profile Photo" style="display: none;">
+                <div id="profileInitials" class="profile-initials">JD</div>
             </div>
-            <div class="name">Miguel Vicente</div>
-            <div class="title">Chief Operations Officer</div>
+            <div class="name" id="profileName">John Doe</div>
+            <div class="title" id="profileTitle">Software Engineer</div>
         </div>
 
         <!-- Main Contact Card -->
@@ -334,7 +333,7 @@
                     </svg>
                     <div class="contact-details">
                         <div class="contact-label">Email</div>
-                        <div class="contact-value">general@matchlytics.ai</div>
+                        <div class="contact-value" id="contactEmail">john.doe@example.com</div>
                     </div>
                 </div>
 
@@ -344,7 +343,7 @@
                     </svg>
                     <div class="contact-details">
                         <div class="contact-label">Phone / WhatsApp</div>
-                        <div class="contact-value">+351 962 130 104</div>
+                        <div class="contact-value" id="contactPhone">+1 (555) 123-4567</div>
                     </div>
                 </div>
             </div>
@@ -393,11 +392,12 @@
         // Contact information - UPDATE THESE VALUES WITH YOUR REAL INFO
         const contactInfo = {
             name: "John Doe",
-            title: "Software Engineer",
+            title: "Software Engineer", 
             phone: "+1 (555) 123-4567",
             email: "john.doe@example.com",
             whatsapp: "15551234567", // WhatsApp number in international format without +
-            initials: "JD", // For profile picture
+            initials: "JD", // For profile picture fallback
+            photo: "", // Add your photo URL here (leave empty to use initials)
             company: {
                 name: "Your Company",
                 logo: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Crect width='200' height='60' fill='%23111827'/%3E%3Ctext x='100' y='35' font-family='Arial' font-size='20' font-weight='bold' text-anchor='middle' fill='white'%3EYour Logo%3C/text%3E%3C/svg%3E" // Replace with your logo URL
@@ -462,6 +462,45 @@ END:VCARD`;
             }
         }
 
+        // Initialize contact information
+        function initializeContactInfo() {
+            document.getElementById('contactEmail').textContent = contactInfo.email;
+            document.getElementById('contactPhone').textContent = contactInfo.phone;
+        }
+
+        // Initialize profile photo or initials
+        function initializeProfile() {
+            const photoElement = document.getElementById('profilePhoto');
+            const initialsElement = document.getElementById('profileInitials');
+            const nameElement = document.getElementById('profileName');
+            const titleElement = document.getElementById('profileTitle');
+            
+            // Set name and title
+            nameElement.textContent = contactInfo.name;
+            titleElement.textContent = contactInfo.title;
+            
+            if (contactInfo.photo && contactInfo.photo.trim() !== '') {
+                // Use photo if provided
+                photoElement.src = contactInfo.photo;
+                photoElement.alt = contactInfo.name + ' Profile Photo';
+                photoElement.style.display = 'block';
+                initialsElement.style.display = 'none';
+                
+                // Handle photo loading errors
+                photoElement.onerror = function() {
+                    console.log('Failed to load profile photo, using initials instead');
+                    photoElement.style.display = 'none';
+                    initialsElement.style.display = 'flex';
+                    initialsElement.textContent = contactInfo.initials;
+                };
+            } else {
+                // Use initials if no photo
+                photoElement.style.display = 'none';
+                initialsElement.style.display = 'flex';
+                initialsElement.textContent = contactInfo.initials;
+            }
+        }
+
         // Initialize company information
         function initializeCompanyInfo() {
             const logoElement = document.getElementById('companyLogo');
@@ -475,10 +514,12 @@ END:VCARD`;
             nameElement.textContent = contactInfo.company.name;
         }
 
-        // Initialize QR code and company info when page loads
+        // Initialize QR code, company info, profile, and contact info when page loads
         window.addEventListener('load', () => {
             generateQRCode();
             initializeCompanyInfo();
+            initializeProfile();
+            initializeContactInfo();
         });
     </script>
 </body>
