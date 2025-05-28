@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Information</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f8f9fa;
+            color: #1f2937;
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 24px 16px;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .profile-image {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .name {
+            font-size: 24px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+
+        .title {
+            font-size: 16px;
+            color: #6b7280;
+            font-weight: 400;
+        }
+
+        .main-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .banner-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 20px 24px;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .company-logo {
+            max-height: 60px;
+            max-width: 200px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .company-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+            margin-top: 8px;
+        }
+
+        .contact-section {
+            background: #111827;
+            color: white;
+            padding: 32px 24px;
+            position: relative;
+        }
+
+        .contact-section::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: #111827;
+            border-radius: 0 0 50% 50% / 0 0 100% 100%;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background-color 0.2s ease;
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .contact-item:first-child {
+            padding-top: 0;
+        }
+
+        .contact-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            margin: 0 -12px;
+            padding-left: 12px;
+            padding-right: 12px;
+            border-radius: 8px;
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 16px;
+            fill: rgba(255, 255, 255, 0.8);
+            flex-shrink: 0;
+        }
+
+        .contact-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .contact-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .contact-value {
+            font-size: 16px;
+            font-weight: 500;
+            color: white;
+            word-break: break-all;
+        }
+
+        .qr-section {
+            background: white;
+            padding: 40px 24px 24px;
+            text-align: center;
+        }
+
+        .qr-header {
+            margin-bottom: 20px;
+        }
+
+        .qr-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .qr-subtitle {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        .qr-code-container {
+            display: inline-block;
+            padding: 16px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 20px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            flex-direction: column;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: #111827;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1f2937;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-secondary {
+            background-color: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e5e7eb;
+            transform: translateY(-1px);
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .stat-item {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 16px 12px;
+            }
+
+            .main-card {
+                padding: 20px;
+            }
+
+            .name {
+                font-size: 22px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Animations */
+        .contact-item, .main-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .main-card {
+            animation-delay: 0.1s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <!-- Banner Section (Behind Profile) -->
+            <div class="banner-section">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Crect width='200' height='60' fill='%23111827'/%3E%3Ctext x='100' y='35' font-family='Arial' font-size='20' font-weight='bold' text-anchor='middle' fill='white'%3EYour Logo%3C/text%3E%3C/svg%3E" 
+                     alt="Company Logo" 
+                     class="company-logo"
+                     id="companyLogo">
+                <div class="company-name" id="companyName">Your Company</div>
+            </div>
+            
+            <div class="profile-image">
+                JD
+            </div>
+            <div class="name">John Doe</div>
+            <div class="title">Software Engineer</div>
+        </div>
+
+        <!-- Main Contact Card -->
+        <div class="main-card">
+
+            <!-- Contact Information Section (Black) -->
+            <div class="contact-section">
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    <div class="contact-details">
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value">john.doe@example.com</div>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    </svg>
+                    <div class="contact-details">
+                        <div class="contact-label">Phone / WhatsApp</div>
+                        <div class="contact-value">+1 (555) 123-4567</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QR Code Section (White) -->
+            <div class="qr-section">
+                <div class="qr-header">
+                    <div class="qr-title">Save Contact</div>
+                    <div class="qr-subtitle">Scan to automatically add my contact information to your phone</div>
+                </div>
+                
+                <div class="qr-code-container">
+                    <div id="qrcode"></div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="downloadVCard()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/>
+                        </svg>
+                        Download Contact
+                    </button>
+                    <button class="btn btn-secondary" onclick="shareContact()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                        </svg>
+                        Share
+                    </button>
+                </div>
+
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <div class="stat-value">QR</div>
+                        <div class="stat-label">Scan & Save</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">vCard</div>
+                        <div class="stat-label">Compatible</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Contact information - UPDATE THESE VALUES WITH YOUR REAL INFO
+        const contactInfo = {
+            name: "John Doe",
+            title: "Software Engineer",
+            phone: "+1 (555) 123-4567",
+            email: "john.doe@example.com",
+            whatsapp: "15551234567", // WhatsApp number in international format without +
+            initials: "JD", // For profile picture
+            company: {
+                name: "Your Company",
+                logo: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Crect width='200' height='60' fill='%23111827'/%3E%3Ctext x='100' y='35' font-family='Arial' font-size='20' font-weight='bold' text-anchor='middle' fill='white'%3EYour Logo%3C/text%3E%3C/svg%3E" // Replace with your logo URL
+            }
+        };
+
+        // Generate vCard data
+        function generateVCard() {
+            const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:${contactInfo.name}
+TITLE:${contactInfo.title}
+TEL;TYPE=CELL:${contactInfo.phone}
+EMAIL:${contactInfo.email}
+URL;TYPE=WhatsApp:https://wa.me/${contactInfo.whatsapp}
+END:VCARD`;
+            return vcard;
+        }
+
+        // Generate QR Code
+        function generateQRCode() {
+            const vcard = generateVCard();
+            const qr = qrcode(0, 'M');
+            qr.addData(vcard);
+            qr.make();
+            
+            document.getElementById('qrcode').innerHTML = qr.createImgTag(3, 8);
+        }
+
+        // Download vCard file
+        function downloadVCard() {
+            const vcard = generateVCard();
+            const blob = new Blob([vcard], { type: 'text/vcard' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${contactInfo.name.replace(/\s+/g, '_')}_contact.vcf`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Share contact (using Web Share API if available)
+        function shareContact() {
+            if (navigator.share) {
+                const vcard = generateVCard();
+                const blob = new Blob([vcard], { type: 'text/vcard' });
+                const file = new File([blob], `${contactInfo.name}_contact.vcf`, { type: 'text/vcard' });
+                
+                navigator.share({
+                    title: `${contactInfo.name}'s Contact`,
+                    text: `Contact information for ${contactInfo.name}`,
+                    files: [file]
+                }).catch(console.error);
+            } else {
+                // Fallback: copy contact info to clipboard
+                const contactText = `${contactInfo.name}\n${contactInfo.title}\n📧 ${contactInfo.email}\n📱 ${contactInfo.phone}\n💬 https://wa.me/${contactInfo.whatsapp}`;
+                navigator.clipboard.writeText(contactText).then(() => {
+                    alert('Contact information copied to clipboard!');
+                });
+            }
+        }
+
+        // Initialize company information
+        function initializeCompanyInfo() {
+            const logoElement = document.getElementById('companyLogo');
+            const nameElement = document.getElementById('companyName');
+            
+            if (contactInfo.company.logo) {
+                logoElement.src = contactInfo.company.logo;
+                logoElement.alt = contactInfo.company.name + ' Logo';
+            }
+            
+            nameElement.textContent = contactInfo.company.name;
+        }
+
+        // Initialize QR code and company info when page loads
+        window.addEventListener('load', () => {
+            generateQRCode();
+            initializeCompanyInfo();
+        });
+    </script>
+</body>
+</html>
