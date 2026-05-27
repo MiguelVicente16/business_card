@@ -1,0 +1,266 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #f8f9fa;
+    color: #1f2937;
+    min-height: 100vh;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 380px;
+    margin: 0 auto;
+    padding: 12px 16px;
+}
+
+.main-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    position: relative;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Black section with all profile info */
+.contact-section {
+    background: #111827;
+    color: white;
+    padding: 20px 24px;
+    position: relative;
+    text-align: center;
+}
+
+.contact-section::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: #111827;
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
+
+/* Company banner in black section - Full width */
+.company-banner {
+    margin: -20px -24px 16px -24px;
+    padding: 0;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+}
+
+.company-logo {
+    width: 100%;
+    height: 60px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Profile section */
+.profile-section {
+    margin-bottom: 16px;
+}
+
+.name {
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.title {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
+}
+
+/* Contact items */
+.contact-items {
+    text-align: left;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+.contact-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.contact-item:first-child {
+    padding-top: 0;
+}
+
+.contact-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    margin: 0 -12px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 8px;
+}
+
+.contact-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 16px;
+    fill: rgba(255, 255, 255, 0.8);
+    flex-shrink: 0;
+}
+
+.contact-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.contact-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+    margin-bottom: 1px;
+}
+
+.contact-value {
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    white-space: nowrap;
+}
+
+.contact-value a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.contact-value a:active {
+    opacity: 0.7;
+}
+
+/* QR Code Section (White) */
+.qr-section {
+    background: white;
+    padding: 24px 24px 20px;
+    text-align: center;
+}
+
+.qr-header {
+    margin-bottom: 12px;
+}
+
+.qr-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 4px;
+}
+
+.qr-subtitle {
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.4;
+}
+
+.qr-code-container {
+    display: inline-block;
+    padding: 12px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    margin-bottom: 14px;
+}
+
+.qr-code-container img {
+    display: block;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+}
+
+.btn {
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background-color: #111827;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #1f2937;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px 12px;
+    }
+
+    .contact-section {
+        padding: 16px 20px;
+    }
+
+    .company-banner {
+        margin: -16px -20px 12px -20px;
+        background: white;
+    }
+
+    .name {
+        font-size: 20px;
+    }
+
+    .contact-value {
+        white-space: normal;
+        word-break: break-all;
+    }
+}
+
+/* Short screens: trim spacing further so it fits without scrolling */
+@media (max-height: 720px) {
+    .company-banner { min-height: 52px; }
+    .company-logo { height: 52px; }
+    .contact-item { padding: 8px 0; }
+    .profile-section { margin-bottom: 12px; }
+    .qr-section { padding: 18px 24px 16px; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
