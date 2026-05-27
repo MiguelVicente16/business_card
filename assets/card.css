@@ -1,8 +1,7 @@
 :root {
-    --accent: #6366f1;
-    --accent-soft: rgba(99, 102, 241, 0.16);
-    --dark: #0f172a;
-    --dark-2: #1e293b;
+    --ink: #0d0d0d;
+    --ink-2: #1c1c1c;
+    --soft: rgba(255, 255, 255, 0.09);
 }
 
 * {
@@ -13,7 +12,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-color: #eef1f6;
+    background-color: #f2f2f3;
     color: #1f2937;
     min-height: 100vh;
     line-height: 1.5;
@@ -29,7 +28,7 @@ body {
 .main-card {
     background: white;
     border-radius: 24px;
-    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.16);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.16);
     overflow: hidden;
     position: relative;
     animation: fadeInUp 0.5s ease-out;
@@ -37,8 +36,8 @@ body {
 
 /* Dark section with brand + profile + contacts */
 .contact-section {
-    background: var(--dark);
-    background-image: radial-gradient(120% 80% at 50% -10%, var(--dark-2) 0%, var(--dark) 55%);
+    background: var(--ink);
+    background-image: radial-gradient(120% 80% at 50% -10%, var(--ink-2) 0%, var(--ink) 55%);
     color: white;
     padding: 22px 24px 36px;
     position: relative;
@@ -53,7 +52,7 @@ body {
     left: 0;
     right: 0;
     height: 28px;
-    background: var(--dark);
+    background: var(--ink);
     border-radius: 0 0 45% 45% / 0 0 100% 100%;
 }
 
@@ -93,8 +92,8 @@ body {
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #c7d2fe;
-    background: var(--accent-soft);
+    color: #e5e5e5;
+    background: var(--soft);
     padding: 4px 12px;
     border-radius: 999px;
 }
@@ -124,7 +123,7 @@ body {
     width: 38px;
     height: 38px;
     border-radius: 11px;
-    background: var(--accent-soft);
+    background: var(--soft);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -135,7 +134,8 @@ body {
 .contact-icon {
     width: 18px;
     height: 18px;
-    fill: #c7d2fe;
+    fill: #ffffff;
+    opacity: 0.9;
 }
 
 .contact-details {
@@ -167,7 +167,7 @@ body {
 }
 
 .contact-value a:active {
-    color: #c7d2fe;
+    color: #bdbdbd;
 }
 
 /* QR section (white) */
@@ -180,7 +180,7 @@ body {
 .qr-title {
     font-size: 16px;
     font-weight: 700;
-    color: var(--dark);
+    color: var(--ink);
     margin-bottom: 3px;
 }
 
@@ -195,8 +195,8 @@ body {
     padding: 14px;
     background: white;
     border-radius: 18px;
-    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.10);
-    border: 1px solid #eef2f7;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.10);
+    border: 1px solid #ececec;
     margin-bottom: 18px;
     line-height: 0;
 }
@@ -229,13 +229,13 @@ body {
 }
 
 .btn-primary {
-    background-color: var(--accent);
+    background-color: var(--ink);
     color: white;
-    box-shadow: 0 6px 18px rgba(99, 102, 241, 0.35);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
 }
 
 .btn-primary:hover {
-    filter: brightness(1.05);
+    background-color: var(--ink-2);
     transform: translateY(-1px);
 }
 
