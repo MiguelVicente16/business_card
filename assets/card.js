@@ -23,6 +23,7 @@
 
     // Fixed company website shown on every card and saved to the contact.
     const WEBSITE = { url: 'https://matchlytics.ai', display: 'matchlytics.ai' };
+    const COMPANY = 'Matchlytics';
 
     const clean = (v) => (v == null ? '' : String(v)).trim();
 
@@ -59,7 +60,8 @@
 
     function buildVCard(p) {
         const lines = ['BEGIN:VCARD', 'VERSION:3.0'];
-        if (clean(p.name)) lines.push('FN:' + clean(p.name));
+        if (clean(p.name)) lines.push('FN:' + clean(p.name) + ' - ' + COMPANY);
+        lines.push('ORG:' + COMPANY);
         if (clean(p.title)) lines.push('TITLE:' + clean(p.title));
         if (clean(p.phone)) lines.push('TEL;TYPE=CELL:' + clean(p.phone));
         if (clean(p.email)) lines.push('EMAIL:' + clean(p.email));
