@@ -1,3 +1,10 @@
+:root {
+    --accent: #6366f1;
+    --accent-soft: rgba(99, 102, 241, 0.16);
+    --dark: #0f172a;
+    --dark-2: #1e293b;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,82 +13,90 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-color: #f8f9fa;
+    background-color: #eef1f6;
     color: #1f2937;
     min-height: 100vh;
     line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
 }
 
 .container {
     max-width: 380px;
     margin: 0 auto;
-    padding: 12px 16px;
+    padding: 16px;
 }
 
 .main-card {
     background: white;
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e5e7eb;
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.16);
     overflow: hidden;
     position: relative;
-    animation: fadeInUp 0.6s ease-out;
+    animation: fadeInUp 0.5s ease-out;
 }
 
-/* Black section with all profile info */
+/* Dark section with brand + profile + contacts */
 .contact-section {
-    background: #111827;
+    background: var(--dark);
+    background-image: radial-gradient(120% 80% at 50% -10%, var(--dark-2) 0%, var(--dark) 55%);
     color: white;
-    padding: 20px 24px;
+    padding: 22px 24px 36px;
     position: relative;
     text-align: center;
 }
 
+/* Smooth concave transition into the white QR section */
 .contact-section::after {
     content: '';
     position: absolute;
     bottom: -1px;
     left: 0;
     right: 0;
-    height: 40px;
-    background: #111827;
-    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+    height: 28px;
+    background: var(--dark);
+    border-radius: 0 0 45% 45% / 0 0 100% 100%;
 }
 
-/* Company banner in black section - Full width */
+/* Company banner - full width white strip */
 .company-banner {
-    margin: -20px -24px 16px -24px;
-    padding: 0;
+    margin: -22px -24px 18px -24px;
     background: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 60px;
+    min-height: 62px;
 }
 
 .company-logo {
     width: 100%;
-    height: 60px;
+    height: 62px;
     object-fit: cover;
     object-position: center;
 }
 
-/* Profile section */
+/* Profile */
 .profile-section {
-    margin-bottom: 16px;
+    margin-bottom: 18px;
 }
 
 .name {
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 23px;
+    font-weight: 700;
     color: white;
-    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+    margin-bottom: 5px;
 }
 
 .title {
-    font-size: 15px;
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 400;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #c7d2fe;
+    background: var(--accent-soft);
+    padding: 4px 12px;
+    border-radius: 999px;
 }
 
 /* Contact items */
@@ -92,9 +107,8 @@ body {
 .contact-item {
     display: flex;
     align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: background-color 0.2s ease;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .contact-item:last-child {
@@ -103,23 +117,25 @@ body {
 }
 
 .contact-item:first-child {
-    padding-top: 0;
+    padding-top: 4px;
 }
 
-.contact-item:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    margin: 0 -12px;
-    padding-left: 12px;
-    padding-right: 12px;
-    border-radius: 8px;
+.contact-icon-wrap {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    flex-shrink: 0;
 }
 
 .contact-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 16px;
-    fill: rgba(255, 255, 255, 0.8);
-    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    fill: #c7d2fe;
 }
 
 .contact-details {
@@ -128,9 +144,11 @@ body {
 }
 
 .contact-label {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.7);
-    font-weight: 500;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     margin-bottom: 1px;
 }
 
@@ -149,61 +167,61 @@ body {
 }
 
 .contact-value a:active {
-    opacity: 0.7;
+    color: #c7d2fe;
 }
 
-/* QR Code Section (White) */
+/* QR section (white) */
 .qr-section {
     background: white;
-    padding: 24px 24px 20px;
+    padding: 22px 24px 24px;
     text-align: center;
 }
 
-.qr-header {
-    margin-bottom: 12px;
-}
-
 .qr-title {
-    font-size: 17px;
-    font-weight: 600;
-    color: #111827;
-    margin-bottom: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3px;
 }
 
 .qr-subtitle {
-    font-size: 13px;
+    font-size: 12.5px;
     color: #6b7280;
-    line-height: 1.4;
+    margin-bottom: 16px;
 }
 
 .qr-code-container {
     display: inline-block;
-    padding: 12px;
+    padding: 14px;
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e5e7eb;
-    margin-bottom: 14px;
+    border-radius: 18px;
+    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.10);
+    border: 1px solid #eef2f7;
+    margin-bottom: 18px;
+    line-height: 0;
 }
 
 .qr-code-container img {
     display: block;
+    width: 150px;
+    height: 150px;
+    image-rendering: pixelated;
 }
 
 .action-buttons {
     display: flex;
-    gap: 12px;
     flex-direction: column;
+    gap: 10px;
 }
 
 .btn {
-    padding: 12px 20px;
-    border-radius: 8px;
+    padding: 13px 20px;
+    border-radius: 12px;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     border: none;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -211,56 +229,40 @@ body {
 }
 
 .btn-primary {
-    background-color: #111827;
+    background-color: var(--accent);
     color: white;
+    box-shadow: 0 6px 18px rgba(99, 102, 241, 0.35);
 }
 
 .btn-primary:hover {
-    background-color: #1f2937;
+    filter: brightness(1.05);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
 }
 
 @media (max-width: 480px) {
-    .container {
-        padding: 10px 12px;
-    }
-
-    .contact-section {
-        padding: 16px 20px;
-    }
-
-    .company-banner {
-        margin: -16px -20px 12px -20px;
-        background: white;
-    }
-
-    .name {
-        font-size: 20px;
-    }
-
-    .contact-value {
-        white-space: normal;
-        word-break: break-all;
-    }
+    .container { padding: 12px; }
+    .contact-section { padding: 18px 20px 32px; }
+    .company-banner { margin: -18px -20px 14px -20px; }
+    .name { font-size: 21px; }
+    .contact-value { white-space: normal; word-break: break-all; }
 }
 
-/* Short screens: trim spacing further so it fits without scrolling */
+/* Short screens: trim further so it fits without scrolling */
 @media (max-height: 720px) {
-    .company-banner { min-height: 52px; }
-    .company-logo { height: 52px; }
-    .contact-item { padding: 8px 0; }
+    .company-banner { min-height: 54px; }
+    .company-logo { height: 54px; }
+    .contact-item { padding: 7px 0; }
+    .contact-icon-wrap { width: 34px; height: 34px; }
     .profile-section { margin-bottom: 12px; }
-    .qr-section { padding: 18px 24px 16px; }
+    .qr-section { padding: 16px 24px 18px; }
+    .qr-code-container img { width: 132px; height: 132px; }
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
 }
