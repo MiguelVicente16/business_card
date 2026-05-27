@@ -192,6 +192,15 @@
             white-space: nowrap;
         }
 
+        .contact-value a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .contact-value a:active {
+            opacity: 0.7;
+        }
+
         /* QR Code Section (White) */
         .qr-section {
             background: white;
@@ -422,20 +431,53 @@
     </div>
 
     <script>
-        // Contact information - Miguel Vicente's Info
-        const contactInfo = {
+        // Default contact info (used when no URL parameters are provided)
+        const defaults = {
             name: "Miguel Vicente",
-            title: "COO", 
+            title: "COO",
             phone: "+351 962130104",
             email: "general@matchlytics.ai",
             linkedin: "https://www.linkedin.com/in/miguel-mendes-vicente/",
-            initials: "MV", // For profile picture fallback
-            photo: "https://media.licdn.com/dms/image/v2/D4D03AQHSPdNGex9_nw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1716369954433?e=1753920000&v=beta&t=iVixgnXNLQQ6nvLkHLaXx8HhcLJmlTEXClFmumg9c6E", // LinkedIn profile photo
+            photo: "https://media.licdn.com/dms/image/v2/D4D03AQHSPdNGex9_nw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1716369954433?e=1753920000&v=beta&t=iVixgnXNLQQ6nvLkHLaXx8HhcLJmlTEXClFmumg9c6E"
+        };
+
+        // Read overrides from the URL query string so each colleague
+        // can have their own card from a single shared link.
+        const params = new URLSearchParams(window.location.search);
+        const get = (key, fallback) => {
+            const v = params.get(key);
+            return v !== null && v.trim() !== '' ? v.trim() : fallback;
+        };
+
+        const name = get('n', defaults.name);
+        const linkedin = get('l', defaults.linkedin);
+
+        // Build initials from the name (e.g. "Ana Sousa" -> "AS").
+        const computedInitials = name
+            .split(/\s+/)
+            .filter(Boolean)
+            .slice(0, 2)
+            .map(w => w[0].toUpperCase())
+            .join('');
+
+        const contactInfo = {
+            name: name,
+            title: get('t', defaults.title),
+            phone: get('p', defaults.phone),
+            email: get('e', defaults.email),
+            linkedin: linkedin,
+            initials: computedInitials || "MV",
+            photo: get('ph', params.has('n') ? '' : defaults.photo),
             company: {
                 name: "Matchlytics",
-                logo: "./banner.jpg" // Replace with your actual logo filename
+                logo: "./banner.jpg"
             }
         };
+
+        // Friendly display version of a LinkedIn URL.
+        function linkedinDisplay(url) {
+            return url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+        }
 
         // Generate vCard data
         function generateVCard() {
@@ -474,31 +516,16 @@ END:VCARD`;
             window.URL.revokeObjectURL(url);
         }
 
-        // Share contact (using Web Share API if available)
-        function shareContact() {
-            if (navigator.share) {
-                const vcard = generateVCard();
-                const blob = new Blob([vcard], { type: 'text/vcard' });
-                const file = new File([blob], `${contactInfo.name}_contact.vcf`, { type: 'text/vcard' });
-                
-                navigator.share({
-                    title: `${contactInfo.name}'s Contact`,
-                    text: `Contact information for ${contactInfo.name}`,
-                    files: [file]
-                }).catch(console.error);
-            } else {
-                // Fallback: copy contact info to clipboard
-                const contactText = `${contactInfo.name}\n${contactInfo.title}\n📧 ${contactInfo.email}\n📱 ${contactInfo.phone}\n💬 https://wa.me/${contactInfo.whatsapp}`;
-                navigator.clipboard.writeText(contactText).then(() => {
-                    alert('Contact information copied to clipboard!');
-                });
-            }
-        }
-
         // Initialize contact information
         function initializeContactInfo() {
-            document.getElementById('contactEmail').textContent = contactInfo.email;
-            document.getElementById('contactPhone').textContent = contactInfo.phone;
+            const telHref = contactInfo.phone.replace(/[^\d+]/g, '');
+            document.getElementById('contactEmail').innerHTML =
+                `<a href="mailto:${contactInfo.email}">${contactInfo.email}</a>`;
+            document.getElementById('contactPhone').innerHTML =
+                `<a href="tel:${telHref}">${contactInfo.phone}</a>`;
+            document.getElementById('contactLinkedIn').innerHTML =
+                `<a href="${contactInfo.linkedin}" target="_blank" rel="noopener">${linkedinDisplay(contactInfo.linkedin)}</a>`;
+            document.title = contactInfo.name + ' — Matchlytics';
         }
 
         // Initialize profile photo or initials
