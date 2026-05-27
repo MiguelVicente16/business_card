@@ -187,11 +187,6 @@
                     <label for="l">LinkedIn URL</label>
                     <input type="url" id="l" placeholder="https://www.linkedin.com/in/ana-sousa" autocomplete="off">
                 </div>
-                <div class="field">
-                    <label for="ph">Photo URL (optional)</label>
-                    <input type="url" id="ph" placeholder="https://...jpg" autocomplete="off">
-                    <div class="hint">Leave empty to show the person's initials instead.</div>
-                </div>
 
                 <div class="result">
                     <div class="result-label">Shareable link &amp; QR code</div>
@@ -209,7 +204,7 @@
     </div>
 
     <script>
-        const fields = ['n', 't', 'e', 'p', 'l', 'ph'];
+        const fields = ['n', 't', 'e', 'p', 'l'];
         const linkInput = document.getElementById('link');
         const openBtn = document.getElementById('openBtn');
         const qrEl = document.getElementById('qrcode');

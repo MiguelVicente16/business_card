@@ -80,43 +80,6 @@
             margin-bottom: 32px;
         }
 
-        .profile-image {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            margin: 0 auto 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            font-weight: 600;
-            color: white;
-            box-shadow: 0 4px 12px white;
-            overflow: hidden;
-            position: relative;
-            border: 3px solid white;
-        }
-
-        .profile-photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            border-radius: 50%;
-        }
-
-        .profile-initials {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            font-weight: 600;
-            color: white;
-        }
-
         .name {
             font-size: 24px;
             font-weight: 600;
@@ -365,10 +328,6 @@
 
                 <!-- Profile Section -->
                 <div class="profile-section">
-                    <div class="profile-image" id="profileContainer">
-                        <img id="profilePhoto" class="profile-photo" alt="Profile Photo" style="display: none;">
-                        <div id="profileInitials" class="profile-initials">MV</div>
-                    </div>
                     <div class="name" id="profileName">Miguel Vicente</div>
                     <div class="title" id="profileTitle">COO</div>
                 </div>
@@ -437,8 +396,7 @@
             title: "COO",
             phone: "+351 962130104",
             email: "general@matchlytics.ai",
-            linkedin: "https://www.linkedin.com/in/miguel-mendes-vicente/",
-            photo: "https://media.licdn.com/dms/image/v2/D4D03AQHSPdNGex9_nw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1716369954433?e=1753920000&v=beta&t=iVixgnXNLQQ6nvLkHLaXx8HhcLJmlTEXClFmumg9c6E"
+            linkedin: "https://www.linkedin.com/in/miguel-mendes-vicente/"
         };
 
         // Read overrides from the URL query string so each colleague
@@ -449,25 +407,12 @@
             return v !== null && v.trim() !== '' ? v.trim() : fallback;
         };
 
-        const name = get('n', defaults.name);
-        const linkedin = get('l', defaults.linkedin);
-
-        // Build initials from the name (e.g. "Ana Sousa" -> "AS").
-        const computedInitials = name
-            .split(/\s+/)
-            .filter(Boolean)
-            .slice(0, 2)
-            .map(w => w[0].toUpperCase())
-            .join('');
-
         const contactInfo = {
-            name: name,
+            name: get('n', defaults.name),
             title: get('t', defaults.title),
             phone: get('p', defaults.phone),
             email: get('e', defaults.email),
-            linkedin: linkedin,
-            initials: computedInitials || "MV",
-            photo: get('ph', params.has('n') ? '' : defaults.photo),
+            linkedin: get('l', defaults.linkedin),
             company: {
                 name: "Matchlytics",
                 logo: "./banner.jpg"
@@ -528,37 +473,10 @@ END:VCARD`;
             document.title = contactInfo.name + ' — Matchlytics';
         }
 
-        // Initialize profile photo or initials
+        // Set name and title
         function initializeProfile() {
-            const photoElement = document.getElementById('profilePhoto');
-            const initialsElement = document.getElementById('profileInitials');
-            const nameElement = document.getElementById('profileName');
-            const titleElement = document.getElementById('profileTitle');
-            
-            // Set name and title
-            nameElement.textContent = contactInfo.name;
-            titleElement.textContent = contactInfo.title;
-            
-            if (contactInfo.photo && contactInfo.photo.trim() !== '') {
-                // Use photo if provided
-                photoElement.src = contactInfo.photo;
-                photoElement.alt = contactInfo.name + ' Profile Photo';
-                photoElement.style.display = 'block';
-                initialsElement.style.display = 'none';
-                
-                // Handle photo loading errors
-                photoElement.onerror = function() {
-                    console.log('Failed to load profile photo, using initials instead');
-                    photoElement.style.display = 'none';
-                    initialsElement.style.display = 'flex';
-                    initialsElement.textContent = contactInfo.initials;
-                };
-            } else {
-                // Use initials if no photo
-                photoElement.style.display = 'none';
-                initialsElement.style.display = 'flex';
-                initialsElement.textContent = contactInfo.initials;
-            }
+            document.getElementById('profileName').textContent = contactInfo.name;
+            document.getElementById('profileTitle').textContent = contactInfo.title;
         }
 
         // Initialize company information
