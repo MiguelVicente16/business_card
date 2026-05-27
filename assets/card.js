@@ -66,7 +66,7 @@
 
     function row(iconPath, label, valueHtml) {
         return `<div class="contact-item">
-            <svg class="contact-icon" viewBox="0 0 24 24">${iconPath}</svg>
+            <span class="contact-icon-wrap"><svg class="contact-icon" viewBox="0 0 24 24">${iconPath}</svg></span>
             <div class="contact-details">
                 <div class="contact-label">${label}</div>
                 <div class="contact-value">${valueHtml}</div>
@@ -113,10 +113,8 @@
                         <div class="contact-items">${rows}</div>
                     </div>
                     <div class="qr-section">
-                        <div class="qr-header">
-                            <div class="qr-title">Save Contact</div>
-                            <div class="qr-subtitle">Scan to add ${isDefault ? 'my' : 'this'} contact to your phone</div>
-                        </div>
+                        <div class="qr-title">Save Contact</div>
+                        <div class="qr-subtitle">Scan to add ${isDefault ? 'my' : 'this'} contact to your phone</div>
                         <div class="qr-code-container"><div id="qrcode"></div></div>
                         <div class="action-buttons">
                             <button class="btn btn-primary" id="downloadBtn">
